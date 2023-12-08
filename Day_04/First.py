@@ -30,6 +30,3 @@ def main(input):
     print(result)
 
 main(readInput())
-
-
-
