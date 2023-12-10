@@ -1,24 +1,26 @@
 import re
 
+
 def readInput():
-    file = open('Day_04\input.txt', 'r')
-    result =file.readlines()
+    file = open("Day_04\input.txt", "r")
+    result = file.readlines()
     file.close
     return result
 
-def main(input):
-    regex = "\d+"    
-    result = 0  
 
-    copystack=[]
+def main(input):
+    regex = "\d+"
+    result = 0
+
+    copystack = []
 
     for line in input:
         wins = 0
-        winnerpart = line[line.find(':')+1:line.find('|')]
-        handpart = line[line.find('|'):len(line)]
-        winners = re.findall(regex,winnerpart)
+        winnerpart = line[line.find(":") + 1 : line.find("|")]
+        handpart = line[line.find("|") : len(line)]
+        winners = re.findall(regex, winnerpart)
         hand = re.findall(regex, handpart)
-        
+
         for number in hand:
             for winner in winners:
                 if number == winner:
@@ -29,14 +31,15 @@ def main(input):
             numberOfPlays += copystack[0]
             del copystack[0]
 
-        result += numberOfPlays  
+        result += numberOfPlays
 
         for i in range(0, wins):
             if len(copystack) > i:
-                copystack[i] = copystack[i]+numberOfPlays
-            else: 
-                copystack.append(numberOfPlays)       
+                copystack[i] = copystack[i] + numberOfPlays
+            else:
+                copystack.append(numberOfPlays)
 
     print(result)
+
 
 main(readInput())
